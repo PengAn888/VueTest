@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<title>Axios</title>
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				ABC
+			</div>
+			<div>content:{{content}}</div>
+			<div>
+				名称：{{info.name}}
+			</div>
+			<div>
+				URL: <a v-bind:href="info.url" target="_blank">{{info.url}}</a>
+			</div>
+			<div>
+				<ul>
+					<li v-for="item in info.links">{{item.name}}-->{{item.url}}</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			var appVue = new Vue({
+				el: "#app",
+				data() {
+					return {
+						content: 100,
+						info: {
+							name: '',
+							url: '',
+							links: null
+						}
+					}
+				},
+				methods: {
+					greet: function(event) {
+						this.content++
+						alert(this.name)
+						alert(event.target.tagName)
+					}
+				},
+				mounted() {
+					axios
+						.get('./data.json')
+						// .then(response => this.info = response.data)
+						.then(function(response) {
+							this.info = response.data
+						}.bind(this))
+				}
+			})
+		</script>
+	</body>
+</html>
