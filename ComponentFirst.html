@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<title>vue1</title>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<my-li-component v-for="item in items" v-bind:item="item"></my-li-component>
+			</ul>
+		</div>
+		<script>
+			Vue.component("my-li-component",{
+				props:["item"],
+				template:"<li>{{item}}</li>"
+			})
+			var app = new Vue({
+				el:'#app',
+				data:{
+					items:["BeiJing","ShangHai","GuangZhou"]
+				}
+			})
+		</script>
+	</body>
+</html>
